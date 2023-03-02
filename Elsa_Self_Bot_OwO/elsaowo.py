@@ -681,61 +681,59 @@ def CheckPrefix(resp):
 
 
 # Check Hunt
-@bot.gateway.command
-def CheckHunt(resp):
-    if not client.stopped and client.webhook['enable']:
-        if resp.event.message:
-            m = resp.parsed.auto()
-            if m['channel_id'] == client.channel and not client.stopped:
-                if m['author']['id'] == client.OwOID:
-                    if client.username in m['content'] and "**🌱" in m['content']:
-                        channels = bot.gateway.session.guild(client.guild_id).channels
-
-                        for i in channels:
-                            if channels[i]['type'] == "guild_text" and channels[i]['id'] == m['channel_id']:
-                                channelname = channels[i]['name']
-
-                        pethunt = ''
-                        if "empowered" in m['content']:
-                            pet1 = function.substring_after(m['content'], ":blank: |")
-                            pethunt = function.substring_before(pet1, ':blank: |')
-                        if "caught" in m['content']:
-                            pet1 = function.substring_after(m['content'], "caught ")
-                            pethunt = function.substring_before(pet1, '!')
-
-                        for i in range(len(client.listhidden)):
-                            if client.listhidden[i].lower() in pethunt.lower():
-                                webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Hidden Pet at  . User: {client.username} <@{client.userid}> ")
-                                webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
-                                print(f"{color.warning}You found Hidden Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
-                                break
-                        for i in range(len(client.listfabled)):
-                            if client.listfabled[i].lower() in pethunt.lower():
-                                webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Fabled Pet at  . User: {client.username} <@{client.userid}> ")
-                                webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
-                                print(f"{color.warning}You found Fabled Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
-                                break
-                        for i in range(len(client.listbotrank)):
-                            if client.listbotrank[i].lower() in pethunt.lower():
-                                webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Bot Rank Pet at  . User: {client.username} <@{client.userid}> ")
-                                webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
-                                print(f"{color.warning}You found Bot Rank Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
-                                break
-                        if "cpatreon" in pethunt:
-                            webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found CPatreon Pet at  . User: {client.username} <@{client.userid}> ")
-                            webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
-                            print(f"{color.warning}You found CPatreon Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
-                        for i in range(len(client.listdistored)):
-                            if client.listdistored[i].lower() in pethunt.lower():
-                                webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Distorted Pet at  . User: {client.username} <@{client.userid}> ")
-                                webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
-                                print(f"{color.warning}You found Distorted Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
-                                break
-                        if "special" in pethunt:
-                            webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Special Pet at  . User: {client.username} <@{client.userid}> ")
-                            webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
-                            print(f"{color.warning}You found Special Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
-
+#@bot.gateway.command
+#def CheckHunt(resp):
+ #   if not client.stopped and client.webhook['enable']:
+  #      if resp.event.message:
+   #         m = resp.parsed.auto()
+    #        if m['channel_id'] == client.channel and not client.stopped:
+     #           if m['author']['id'] == client.OwOID:
+      #              if client.username in m['content'] and "**🌱" in m['content']:
+       #                 channels = bot.gateway.session.guild(client.guild_id).channels
+#
+ #                       for i in channels:
+  #                          if channels[i]['type'] == "guild_text" and channels[i]['id'] == m['channel_id']:
+   #                             channelname = channels[i]['name']
+#
+ #                       pethunt = ''
+  #                      if "empowered" in m['content']:
+   #                         pet1 = function.substring_after(m['content'], ":blank: |")
+    #                        pethunt = function.substring_before(pet1, ':blank: |')
+     #                   if "caught" in m['content']:
+      #                      pet1 = function.substring_after(m['content'], "caught ")
+       #                     pethunt = function.substring_before(pet1, '!')
+#
+ #                       for i in range(len(client.listhidden)):
+  #                          if client.listhidden[i].lower() in pethunt.lower():
+   #                             webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Hidden Pet at  . User: {client.username} <@{client.userid}> ")
+    #                            webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
+     #                           print(f"{color.warning}You found Hidden Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
+      #                          break
+       #                 for i in range(len(client.listfabled)):
+        #                    if client.listfabled[i].lower() in pethunt.lower():
+         #                       webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Fabled Pet at  . User: {client.username} <@{client.userid}> ")
+          #                      webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
+           #                     print(f"{color.warning}You found Fabled Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
+            #                    break
+             #           for i in range(len(client.listbotrank)):
+              #              if client.listbotrank[i].lower() in pethunt.lower():
+               #                 webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Bot Rank Pet at  . User: {client.username} <@{client.userid}> ")
+                #                webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
+                 #               print(f"{color.warning}You found Bot Rank Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
+                  #              break
+                   #     if "cpatreon" in pethunt:
+                    #        webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found CPatreon Pet at  . User: {client.username} <@{client.userid}> ")
+                     #       webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
+                      #      print(f"{color.warning}You found CPatreon Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
+                       # for i in range(len(client.listdistored)):
+                        #    if client.listdistored[i].lower() in pethunt.lower():
+                         #       webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Distorted Pet at  . User: {client.username} <@{client.userid}> ")
+                          #     print(f"{color.warning}You found Distorted Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
+                           #     break
+                        #if "special" in pethunt:
+                         #   webhook.webhookPing(f"<@{client.webhook['pingid']}> [INFO] I have found Special Pet at  . User: {client.username} <@{client.userid}> ")
+                          #  webhook.webhookPing(f"https://discord.com/channels/{client.guild_id}/{m['channel_id']}/{m['id']}")
+                           # print(f"{color.warning}You found Special Pet by hunting at channel {channelname} in server {client.guild_name} with message id is {m['id']}")
 
 @bot.gateway.command
 def CheckHuntBot(resp):
@@ -1097,14 +1095,14 @@ def ElsaLoopie():
                     runner.sell(client.username)
 
             # Change Channel Mode
-            if client.exp['changechannel'] and client.exp['enable'] and not client.stopped:
-                if time() - change > random.randint(600, 1500) and not client.stopped:
-                    change = time()
-                    guild_spam_id = bot.getChannel(client.channelspambackup).json()['guild_id']
-                    channels_spam = bot.gateway.session.guild(guild_spam_id).channels
-                    channel = runner.changeChannel(channels_spam)
-                    client.exp['channelspamid'] = channel[0]
-                    print(f"{at()}{color.reset}{color.okcyan} [INFO] {color.yellow} Changed Channel Spaming To : {color.cyan}{channel[1]}{color.reset}")
+         #   if client.exp['changechannel'] and client.exp['enable'] and not client.stopped:
+          #      if time() - change > random.randint(600, 1500) and not client.stopped:
+           #         change = time()
+            #        guild_spam_id = bot.getChannel(client.channelspambackup).json()['guild_id']
+             #       channels_spam = bot.gateway.session.guild(guild_spam_id).channels
+              #      channel = runner.changeChannel(channels_spam)
+               #     client.exp['channelspamid'] = channel[0]
+                #    print(f"{at()}{color.reset}{color.okcyan} [INFO] {color.yellow} Changed Channel Spaming To : {color.cyan}{channel[1]}{color.reset}")
 
             # Coin Flip
             if time() - coin_flip > random.randint(17, 28) and not client.stopped:
