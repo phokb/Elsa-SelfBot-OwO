@@ -143,7 +143,7 @@ def on_ready(resp: object) -> None:
         user = bot.gateway.session.user
         client.username = user['username']
         client.userid = user['id']
-        client.guild_id = bot.getChannel(client.channel).json()['guild_id']
+    #    client.guild_id = bot.getChannel(client.channel).json()['guild_id']
         client.guild_name = bot.gateway.session.guild(client.guild_id).name
 
         ui.slowPrinting(f"\nLogged in as {color.okgreen}{user['username']}#{user['discriminator']}{color.reset}")
